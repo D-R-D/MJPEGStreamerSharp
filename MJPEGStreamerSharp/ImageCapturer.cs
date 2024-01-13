@@ -28,11 +28,15 @@ namespace MJPEGStreamerSharp
             });
         }
 
-        internal void StartCapture()
+        internal async Task StartCapture()
         {
-            m_IsActive = true;
-            m_CaptureProcess.Start();
-            m_CaptureProcess.BeginOutputReadLine();
+            _ = Task.Run(() => {
+                m_IsActive = true;
+                m_CaptureProcess.Start();
+                m_CaptureProcess.BeginOutputReadLine();
+            });
+
+            await Task.CompletedTask;
         }
 
         internal void StopCapture()
