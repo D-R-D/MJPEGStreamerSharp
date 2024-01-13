@@ -40,7 +40,7 @@ namespace MJPEGStreamerSharp
                         clientInfo.Add(context);
                         if (!m_ImageCapturer.IsActive)
                         {
-                            m_ImageCapturer.StartCapture();
+                            _ = m_ImageCapturer.StartCapture();
                         }
                     }
                     Console.WriteLine($"Access required from {context.Request.UserHostAddress}");

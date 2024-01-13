@@ -30,8 +30,9 @@ namespace MJPEGStreamerSharp
 
         internal async Task StartCapture()
         {
+            m_IsActive = true;
+
             _ = Task.Run(() => {
-                m_IsActive = true;
                 m_CaptureProcess.Start();
                 m_CaptureProcess.BeginOutputReadLine();
             });
