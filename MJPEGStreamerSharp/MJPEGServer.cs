@@ -35,6 +35,7 @@ namespace MJPEGStreamerSharp
                     // GetContextAsync()でリクエスト受け付け -> ProcessRequestAsync(context)で応答
                     // ProcessRequestAsync()での処理内容に関わらずすぐに次のGetContextAsync()が回る
                     var context = await server.GetContextAsync();
+                    Console.WriteLine($"Access required from {context.Request.UserHostAddress}");
                     lock (clientInfo) 
                     {
                         clientInfo.Add(context);
