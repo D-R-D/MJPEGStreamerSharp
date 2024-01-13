@@ -35,7 +35,6 @@ namespace MJPEGStreamerSharp
                     // GetContextAsync()でリクエスト受け付け -> ProcessRequestAsync(context)で応答
                     // ProcessRequestAsync()での処理内容に関わらずすぐに次のGetContextAsync()が回る
                     var context = await server.GetContextAsync();
-                    Console.WriteLine($"Access required from {context.Request.UserHostAddress}");
                     lock (clientInfo) 
                     {
                         clientInfo.Add(context);
@@ -44,6 +43,7 @@ namespace MJPEGStreamerSharp
                             m_ImageCapturer.StartCapture();
                         }
                     }
+                    Console.WriteLine($"Access required from {context.Request.UserHostAddress}");
                     _ = ProcessRequestAsync(context); // リクエストの処理を非同期で開始
                 }
             });
@@ -56,6 +56,8 @@ namespace MJPEGStreamerSharp
         /// <returns></returns>
         async Task ProcessRequestAsync(HttpListenerContext context)
         {
+            Console.WriteLine("Request accept process.");
+
             // 受信contextからリクエスト内容とレスポンスの作成を行う
             HttpListenerRequest request = context.Request;
             HttpListenerResponse response = context.Response;
@@ -89,6 +91,7 @@ namespace MJPEGStreamerSharp
                     m_ImageCapturer.StopCapture();
                 }
             }
+            Console.WriteLine("Connection disposed.");
             response.Close();
         }
 
