@@ -117,6 +117,7 @@ namespace MJPEGStreamerSharp
 
             while(m_ImageCache.ImageBytes == null)
             {
+                Console.WriteLine("null image");
                 Thread.Sleep(100);
             }
 
@@ -155,6 +156,7 @@ namespace MJPEGStreamerSharp
 
             while (m_ImageCache.ImageBytes == null) 
             {
+                Console.WriteLine("null image");
                 Thread.Sleep(100);
             }
 
